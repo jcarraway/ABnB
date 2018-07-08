@@ -1,5 +1,15 @@
 import * as React from 'react';
 
-export function RegisterConnector() {
-  return <p>Register page</p>;
+import { RegisterView } from './view/RegisterView';
+
+// controller -> connector -> view
+export class RegisterConnector extends React.PureComponent {
+  dummySubmit = async (values: any) => {
+    console.log(values);
+    return null;
+  };
+
+  render() {
+    return <RegisterView submit={this.dummySubmit} />;
+  }
 }
