@@ -1,6 +1,7 @@
 import { Connection } from 'typeorm';
 import * as Redis from 'ioredis';
 import * as faker from 'faker';
+import { passwordTooShort } from '@abb/common';
 
 import { TestClient } from '../../../utils/testClient';
 import { User } from '../../../entity/User';
@@ -9,7 +10,6 @@ import { forgotPasswordLockAccount } from '../../../utils/forgotPasswordLockAcco
 import { accountLockedError } from '../login/errorMessages';
 import { expiredKeyError } from './errorMessages';
 import { createTestConn } from '../../../testUtils/createTestConn';
-import { passwordTooShort } from '../register/errorMessages';
 
 let conn: Connection;
 const redis = new Redis();

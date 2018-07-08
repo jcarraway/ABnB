@@ -21,5 +21,5 @@ export const sendEmail = async (recipient: string, url: string) => {
     },
     recipients: [{ address: recipient }],
   });
-  console.log(response);
+  console.log('send email response: ', response);
 };

@@ -23,7 +23,7 @@ export const resolvers: ResolverMap = {
       { email, password }: GQL.ILoginOnMutationArguments,
       { session, redis, req }
     ) => {
-      const user = await User.findOne({ where: { email: email } });
+      const user = await User.findOne({ where: { email } });
 
       if (!user) {
         return errorResponse;
