@@ -6,3 +6,4 @@ temp/
 dump.rdb
 *.log
 .env
+.env.prod

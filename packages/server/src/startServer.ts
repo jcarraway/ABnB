@@ -1,4 +1,6 @@
 import 'reflect-metadata';
+// tslint:disable-next-line:no-var-requires
+require('dotenv-safe').config();
 import { GraphQLServer } from 'graphql-yoga';
 import * as session from 'express-session';
 import * as connectRedis from 'connect-redis';
@@ -11,6 +13,7 @@ import { genSchema } from './utils/generateSchema';
 import { confirmEmail } from './routes/confirmEmail';
 import { createTypeormConn } from './utils/createTypeormConn';
 import { createTestConn } from './testUtils/createTestConn';
+import { AddressInfo } from 'net';
 
 const SESSION_SECRET = 'alkdjfalkdjaflkdjag';
 
@@ -79,8 +82,8 @@ export const startServer = async () => {
     cors,
     port: process.env.NODE_ENV === 'test' ? 0 : 4000,
   });
-  console.log('Server is running on localhost:4000');
+  const { port } = app.address() as AddressInfo;
+  console.log(`Server is running on localhost:${port}`);
 
-  console.log(app.address());
   return app;
 };
