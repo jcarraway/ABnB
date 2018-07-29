@@ -13,7 +13,6 @@ import { genSchema } from './utils/generateSchema';
 import { confirmEmail } from './routes/confirmEmail';
 import { createTypeormConn } from './utils/createTypeormConn';
 import { createTestConn } from './testUtils/createTestConn';
-import { AddressInfo } from 'net';
 
 const SESSION_SECRET = 'alkdjfalkdjaflkdjag';
 
@@ -78,11 +77,13 @@ export const startServer = async () => {
   } else {
     await createTypeormConn();
   }
+
+  const port = process.env.PORT || 4000;
   const app = await server.start({
     cors,
-    port: process.env.NODE_ENV === 'test' ? 0 : 4000,
+    port: process.env.NODE_ENV === 'test' ? 0 : port,
   });
-  const { port } = app.address() as AddressInfo;
+
   console.log(`Server is running on localhost:${port}`);
 
   return app;
