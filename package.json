@@ -4,7 +4,8 @@
     "packages/*"
   ],
   "scripts": {
-    "build:server": "lerna run build --scope={@abb/common,@abb/server}"
+    "build:server": "lerna run build --scope={@abb/common,@abb/server}",
+    "build:web": "lerna run build --scope={@abb/common,@abb/web,@abb/controllers}"
   },
   "devDependencies": {
     "lerna": "^2.11.0"
