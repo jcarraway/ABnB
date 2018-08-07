@@ -7,3 +7,4 @@ dump.rdb
 *.log
 .env
 .env.prod
+netlify.toml
