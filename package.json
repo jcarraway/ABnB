@@ -1,18 +1,22 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
-  "nohoist": [
-    "**/react-native",
-    "**/react-native/**",
-    "**/expo",
-    "**/expo/**",
-    "**/react-native-typescript-transformer",
-    "**/react-native-typescript-transformer/**",
-    "**/metro-bundler-config-yarn-workspaces",
-    "**/metro-bundler-config-yarn-workspaces/**"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*"
+    ],
+    "nohoist": [
+      "**/react-native-elements",
+      "**/react-native-elements/**",
+      "**/react-native",
+      "**/react-native/**",
+      "**/expo",
+      "**/expo/**",
+      "**/react-native-typescript-transformer",
+      "**/react-native-typescript-transformer/**",
+      "**/metro-bundler-config-yarn-workspaces",
+      "**/metro-bundler-config-yarn-workspaces/**"
+    ]
+  },
   "scripts": {
     "build:server": "lerna run build --scope={@abb/common,@abb/server}",
     "build:web": "lerna run build --scope={@abb/common,@abb/web,@abb/controllers}"

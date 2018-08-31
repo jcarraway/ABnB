@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Form, Icon, Button } from 'antd';
-import { withFormik, FormikErrors, FormikProps, Field } from 'formik';
+import * as Antd from 'antd';
+import { withFormik, FormikErrors, FormikProps, Field, Form } from 'formik';
 
 import { userValidationSchema } from '@abb/common';
 import { InputField } from '../../shared/InputField';
 
-const FormItem = Form.Item;
+const { Form: AntForm, Icon, Button } = Antd;
+const FormItem = AntForm.Item;
 
 interface FormValues {
   email: string;
@@ -18,9 +19,8 @@ interface Props {
 
 class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   render() {
-    const { handleSubmit } = this.props;
     return (
-      <form style={{ display: 'flex' }} onSubmit={handleSubmit}>
+      <Form style={{ display: 'flex' }}>
         <div style={{ width: 400, margin: 'auto' }}>
           <Field
             name="email"
@@ -59,7 +59,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
             Or <a href="">login now!</a>
           </FormItem>
         </div>
-      </form>
+      </Form>
     );
   }
 }
