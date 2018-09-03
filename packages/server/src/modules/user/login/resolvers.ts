@@ -26,31 +26,35 @@ export const resolvers: ResolverMap = {
       const user = await User.findOne({ where: { email } });
 
       if (!user) {
-        return errorResponse;
+        return { errors: errorResponse };
       }
 
       if (!user.confirmed) {
-        return [
-          {
-            path: 'email',
-            message: confirmEmailError,
-          },
-        ];
+        return {
+          errors: [
+            {
+              path: 'email',
+              message: confirmEmailError,
+            },
+          ],
+        };
       }
 
       if (user.accountLocked) {
-        return [
-          {
-            path: 'email',
-            message: accountLockedError,
-          },
-        ];
+        return {
+          errors: [
+            {
+              path: 'email',
+              message: accountLockedError,
+            },
+          ],
+        };
       }
 
       const valid = await bcrypt.compare(password, user.password);
 
       if (!valid) {
-        return errorResponse;
+        return { errors: errorResponse };
       }
 
       // login successful
@@ -59,7 +63,7 @@ export const resolvers: ResolverMap = {
         await redis.lpush(`${userSessionIdPrefix}${user.id}`, req.sessionID);
       }
 
-      return null;
+      return { sessionId: req.sessionID };
     },
   },
 };

@@ -4,13 +4,16 @@ import {
   BeforeInsert,
   BaseEntity,
   PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import * as shortid from 'shortid';
 import * as bcrypt from 'bcryptjs';
 
 @Entity('users')
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn('uuid') id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ unique: true })
   shortLink: string;
@@ -18,13 +21,20 @@ export class User extends BaseEntity {
   @Column('varchar', { length: 255 })
   email: string;
 
-  @Column('text') password: string;
+  @Column('text')
+  password: string;
 
   @Column('boolean', { default: false })
   confirmed: boolean;
 
   @Column('boolean', { default: false })
   accountLocked: boolean;
+
+  @CreateDateColumn()
+  createdDate: Date;
+
+  @UpdateDateColumn()
+  updatedDate: Date;
 
   @BeforeInsert()
   addShortLink() {

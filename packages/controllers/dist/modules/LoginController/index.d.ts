@@ -1,6 +1,7 @@
-import * as React from '../../../../app/node_modules/@types/react-native/node_modules/@types/react';
+import * as React from 'react';
 import { LoginMutationVariables } from '../../schemaTypes';
 interface Props {
+    onSessionId?: (sessionId: string) => void;
     children: (data: {
         submit: (values: LoginMutationVariables) => Promise<{
             [key: string]: string;

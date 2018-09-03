@@ -1,4 +1,4 @@
-import * as React from '../../../../app/node_modules/@types/react-native/node_modules/@types/react';
+import * as React from 'react';
 import { RegisterMutationVariables } from '../../schemaTypes';
 interface Props {
     children: (data: {
