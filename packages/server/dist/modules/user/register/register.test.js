@@ -14,8 +14,10 @@ const errorMessages_1 = require("./errorMessages");
 const createTestConn_1 = require("../../../testUtils/createTestConn");
 const testClient_1 = require("../../../utils/testClient");
 const User_1 = require("../../../entity/User");
+faker.seed(Date.now() + 5);
 const email = faker.internet.email();
 const password = faker.internet.password();
+const client = new testClient_1.TestClient(process.env.TEST_HOST);
 let conn;
 beforeAll(() => __awaiter(this, void 0, void 0, function* () {
     conn = yield createTestConn_1.createTestConn();
@@ -25,7 +27,6 @@ afterAll(() => __awaiter(this, void 0, void 0, function* () {
 }));
 describe('Register user', () => __awaiter(this, void 0, void 0, function* () {
     it('check for duplicate emails', () => __awaiter(this, void 0, void 0, function* () {
-        const client = new testClient_1.TestClient(process.env.TEST_HOST);
         const response = yield client.register(email, password);
         expect(response.data).toEqual({ register: null });
         const users = yield User_1.User.find({ where: { email } });
@@ -41,7 +42,6 @@ describe('Register user', () => __awaiter(this, void 0, void 0, function* () {
         });
     }));
     it('check bad email', () => __awaiter(this, void 0, void 0, function* () {
-        const client = new testClient_1.TestClient(process.env.TEST_HOST);
         const response3 = yield client.register('b', password);
         expect(response3.data).toEqual({
             register: [
@@ -57,7 +57,6 @@ describe('Register user', () => __awaiter(this, void 0, void 0, function* () {
         });
     }));
     it('catch bad password', () => __awaiter(this, void 0, void 0, function* () {
-        const client = new testClient_1.TestClient(process.env.TEST_HOST);
         const response4 = yield client.register(email, 'a');
         expect(response4.data).toEqual({
             register: [
@@ -69,7 +68,6 @@ describe('Register user', () => __awaiter(this, void 0, void 0, function* () {
         });
     }));
     it('catch bad email and bad password', () => __awaiter(this, void 0, void 0, function* () {
-        const client = new testClient_1.TestClient(process.env.TEST_HOST);
         const response5 = yield client.register('b', 'a');
         expect(response5.data).toEqual({
             register: [
