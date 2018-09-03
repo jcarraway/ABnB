@@ -6,9 +6,10 @@
   "license": "MIT",
   "scripts": {
     "build": "rm -rf dist && tsc",
-    "download-schema": "apollo schema:download --endpoint http://localhost:4000",
-    "generate": "apollo codegen:generate --queries src/**/*.tsx --schema schema.json --target typescript --addTypename",
-    "gen-types": "npm run download-schema && npm run generate"
+    "schema:download": "apollo schema:download --endpoint http://localhost:4000",
+    "codegen:generate": "apollo codegen:generate --queries=./src/**/*.tsx --schema=./schema.json --target=typescript --outputFlat ./src/schemaTypes.ts",
+    "gen:types": "npm run schema:download && npm run codegen:generate",
+    "refresh:types": "npm run build && npm run gen:types"
   },
   "dependencies": {
     "graphql": "^0.13.2",
@@ -21,7 +22,8 @@
     "@types/node": "^10.5.2",
     "@types/react": "16.4.2",
     "@types/react-dom": "^16.0.6",
-    "apollo": "^1.4.0",
+    "apollo": "1.9.1",
+    "apollo-codegen": "^0.20.2",
     "tslint": "^5.10.0",
     "tslint-config-prettier": "^1.13.0",
     "typescript": "^2.9.2"

@@ -1,5 +1,3 @@
-
-
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
@@ -8,7 +6,6 @@
 // ====================================================
 
 export interface RegisterMutation_register {
-  __typename: "Error";
   path: string;
   message: string;
 }

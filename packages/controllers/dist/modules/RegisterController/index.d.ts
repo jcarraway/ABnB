@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RegisterMutationVariables } from './__generated__/RegisterMutation';
+import { RegisterMutationVariables } from '../../schemaTypes';
 interface Props {
     children: (data: {
         submit: (values: RegisterMutationVariables) => Promise<null>;
