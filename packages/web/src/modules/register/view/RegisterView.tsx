@@ -1,11 +1,10 @@
 import * as React from 'react';
-import * as Antd from 'antd';
+import { Form as AntForm, Icon, Button } from 'antd';
 import { withFormik, FormikErrors, FormikProps, Field, Form } from 'formik';
 
 import { userValidationSchema } from '@abb/common';
 import { InputField } from '../../shared/InputField';
 
-const { Form: AntForm, Icon, Button } = Antd;
 const FormItem = AntForm.Item;
 
 interface FormValues {
@@ -27,7 +26,6 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
             component={InputField}
             prefix={
               <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} /> as any
-              // tslint:disable-next-line:jsx-curly-spacing
             }
             placeholder="Email"
           />
@@ -37,7 +35,6 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
             component={InputField}
             prefix={
               <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} /> as any
-              // tslint:disable-next-line:jsx-curly-spacing
             }
             placeholder="Password"
           />
