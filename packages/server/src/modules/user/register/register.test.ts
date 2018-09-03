@@ -7,8 +7,11 @@ import { createTestConn } from '../../../testUtils/createTestConn';
 import { TestClient } from '../../../utils/testClient';
 import { User } from '../../../entity/User';
 
+faker.seed(Date.now() + 5);
 const email = faker.internet.email();
 const password = faker.internet.password();
+
+const client = new TestClient(process.env.TEST_HOST as string);
 
 let conn: Connection;
 beforeAll(async () => {
@@ -20,7 +23,6 @@ afterAll(async () => {
 
 describe('Register user', async () => {
   it('check for duplicate emails', async () => {
-    const client = new TestClient(process.env.TEST_HOST as string);
     // test for successful user registration
     const response = await client.register(email, password);
     expect(response.data).toEqual({ register: null });
@@ -39,7 +41,6 @@ describe('Register user', async () => {
   });
 
   it('check bad email', async () => {
-    const client = new TestClient(process.env.TEST_HOST as string);
     const response3: any = await client.register('b', password);
     expect(response3.data).toEqual({
       register: [
@@ -56,7 +57,6 @@ describe('Register user', async () => {
   });
 
   it('catch bad password', async () => {
-    const client = new TestClient(process.env.TEST_HOST as string);
     const response4: any = await client.register(email, 'a');
     expect(response4.data).toEqual({
       register: [
@@ -69,7 +69,6 @@ describe('Register user', async () => {
   });
 
   it('catch bad email and bad password', async () => {
-    const client = new TestClient(process.env.TEST_HOST as string);
     const response5: any = await client.register('b', 'a');
     expect(response5.data).toEqual({
       register: [
