@@ -66,7 +66,7 @@ var C = /** @class */ (function (_super) {
                             })];
                     case 1:
                         _a = (_b.sent()).data.login, errors = _a.errors, sessionId = _a.sessionId;
-                        console.log('response: ', errors, sessionId);
+                        console.log('response: [errors] sessionId', errors, sessionId);
                         if (errors) {
                             // show errors
                             return [2 /*return*/, normalizeErrors(errors)];

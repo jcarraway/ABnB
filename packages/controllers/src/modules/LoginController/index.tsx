@@ -27,7 +27,7 @@ class C extends React.PureComponent<
     } = await this.props.mutate({
       variables: values,
     });
-    console.log('response: ', errors, sessionId);
+    console.log('response: [errors] sessionId', errors, sessionId);
 
     if (errors) {
       // show errors
