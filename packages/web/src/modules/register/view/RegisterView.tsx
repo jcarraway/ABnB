@@ -41,9 +41,7 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
             placeholder="Password"
           />
           <FormItem>
-            <a className="login-form-forgot" href="">
-              Forgot password
-            </a>
+            <Link to="/reset">Forgot password</Link>
           </FormItem>
           <FormItem>
             <Button

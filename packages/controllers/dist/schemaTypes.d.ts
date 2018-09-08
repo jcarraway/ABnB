@@ -1,3 +1,20 @@
+export interface ForgotPasswordChangeMutation_forgotPasswordChange {
+    path: string;
+    message: string;
+}
+export interface ForgotPasswordChangeMutation {
+    forgotPasswordChange: ForgotPasswordChangeMutation_forgotPasswordChange[] | null;
+}
+export interface ForgotPasswordChangeMutationVariables {
+    newPassword: string;
+    key: string;
+}
+export interface SendForgotPasswordEmailMutation {
+    sendForgotPasswordEmail: boolean | null;
+}
+export interface SendForgotPasswordEmailMutationVariables {
+    email: string;
+}
 export interface LoginMutation_login_errors {
     path: string;
     message: string;

@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { Form as AntForm, Icon, Button } from 'antd';
 import { withFormik, FormikProps, Field, Form } from 'formik';
-import { Link } from 'react-router-dom';
-import { loginSchema } from '@abb/common';
 import { NormalizedErrorMap } from '@abb/controllers';
 
 import { InputField } from '../../shared/InputField';
@@ -11,7 +9,6 @@ const FormItem = AntForm.Item;
 
 interface FormValues {
   email: string;
-  password: string;
 }
 
 interface Props {
@@ -31,29 +28,14 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
             }
             placeholder="Email"
           />
-          <Field
-            name="password"
-            type="password"
-            component={InputField}
-            prefix={
-              <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} /> as any
-            }
-            placeholder="Password"
-          />
-          <FormItem>
-            <Link to="/reset">Forgot password</Link>
-          </FormItem>
           <FormItem>
             <Button
               type="primary"
               htmlType="submit"
               className="login-form-button"
             >
-              Login
+              Reset password
             </Button>
-          </FormItem>
-          <FormItem>
-            Or <Link to="/register">register!</Link>
           </FormItem>
         </div>
       </Form>
@@ -61,11 +43,8 @@ class C extends React.PureComponent<FormikProps<FormValues> & Props> {
   }
 }
 
-export const LoginView = withFormik<Props, FormValues>({
-  validationSchema: loginSchema,
-  validateOnBlur: false,
-  validateOnChange: false,
-  mapPropsToValues: () => ({ email: '', password: '' }),
+export const ForgotPasswordView = withFormik<Props, FormValues>({
+  mapPropsToValues: () => ({ email: '' }),
   handleSubmit: async (values, { props, setErrors }) => {
     const errors = await props.submit(values);
     if (errors) {
