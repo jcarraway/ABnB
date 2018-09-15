@@ -1,4 +1,4 @@
-import { userValidationSchema } from '@abb/common';
+import { userValidationSchema } from '../../../../../common/dist';
 
 import { duplicateEmail } from './errorMessages';
 import { ResolverMap } from '../../../types/graphql-utils';

@@ -1,5 +1,5 @@
 import * as bcrypt from 'bcryptjs';
-import { changePasswordSchema } from '@abb/common';
+import { changePasswordSchema } from '../../../../../common/dist';
 
 import { ResolverMap } from '../../../types/graphql-utils';
 // import { forgotPasswordLockAccount } from '../../../utils/forgotPasswordLockAccount';

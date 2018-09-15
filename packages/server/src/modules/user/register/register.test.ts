@@ -1,6 +1,6 @@
 import { Connection } from 'typeorm';
 import * as faker from 'faker';
-import { invalidEmail, emailTooShort, passwordTooShort } from '@abb/common';
+import { invalidEmail, emailTooShort, passwordTooShort } from '../../../../../common/dist';
 
 import { duplicateEmail } from './errorMessages';
 import { createTestConn } from '../../../testUtils/createTestConn';
