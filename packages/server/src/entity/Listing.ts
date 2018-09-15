@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  ManyToOne
+  ManyToOne,
 } from 'typeorm';
 import * as shortid from 'shortid';
 
@@ -20,8 +20,11 @@ export class Listing extends BaseEntity {
   @Column({ unique: true })
   shortLink: string;
 
-  @Column('varchar', { length: 255 })
+  @Column('varchar', { length: 100 })
   name: string;
+
+  @Column('varchar', { length: 100 })
+  category: string;
 
   @Column('text')
   pictureUrl: string;
@@ -52,6 +55,9 @@ export class Listing extends BaseEntity {
 
   @UpdateDateColumn()
   updatedDate: Date;
+
+  @Column('uuid')
+  userId: string;
 
   @ManyToOne(() => User, user => user.listings)
   user: User;
