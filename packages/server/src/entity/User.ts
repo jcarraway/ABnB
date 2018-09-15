@@ -6,9 +6,12 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToMany
 } from 'typeorm';
 import * as shortid from 'shortid';
 import * as bcrypt from 'bcryptjs';
+
+import { Listing } from './Listing';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -35,6 +38,9 @@ export class User extends BaseEntity {
 
   @UpdateDateColumn()
   updatedDate: Date;
+
+  @OneToMany(() => Listing, listing => listing.user)
+  listings: Listing[];
 
   @BeforeInsert()
   addShortLink() {

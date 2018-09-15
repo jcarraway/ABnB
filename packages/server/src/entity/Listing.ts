@@ -6,9 +6,11 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne
 } from 'typeorm';
-
 import * as shortid from 'shortid';
+
+import { User } from './User';
 
 @Entity('listings')
 export class Listing extends BaseEntity {
@@ -50,6 +52,9 @@ export class Listing extends BaseEntity {
 
   @UpdateDateColumn()
   updatedDate: Date;
+
+  @ManyToOne(() => User, user => user.listings)
+  user: User;
 
   @BeforeInsert()
   addShortLink() {
