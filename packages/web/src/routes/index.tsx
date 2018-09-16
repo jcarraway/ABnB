@@ -1,10 +1,12 @@
 import * as React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { AuthRoute } from '@abb/controllers';
 
 import { RegisterConnector } from '../modules/register/RegisterConnector';
 import { LoginConnector } from '../modules/login/LoginConnector';
 import { ForgotPasswordConnector } from '../modules/forgotPassword/ForgotPasswordConnector';
 import { ChangePasswordConnector } from '../modules/changePassword/ChangePasswordConnector';
+import { CreateListingConnector } from '../modules/listing/create/CreateListingConnector';
 import { TextPage } from '../modules/textPage';
 
 export const Routes = () => (
@@ -19,6 +21,7 @@ export const Routes = () => (
         component={ChangePasswordConnector}
       />
       <Route path="/m" component={TextPage} />
+      <AuthRoute path="/create-listing" component={CreateListingConnector} />
     </Switch>
   </BrowserRouter>
 );

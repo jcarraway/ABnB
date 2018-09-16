@@ -43,7 +43,7 @@ describe('me', async () => {
     expect(response.data).toEqual({
       me: {
         id: userId,
-        email: email,
+        email,
       },
     });
   });
