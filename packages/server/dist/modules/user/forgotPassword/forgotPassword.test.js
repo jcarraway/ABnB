@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const Redis = require("ioredis");
 const faker = require("faker");
-const common_1 = require("@abb/common");
+const dist_1 = require("../../../../../common/dist");
 const testClient_1 = require("../../../utils/testClient");
 const User_1 = require("../../../entity/User");
 const createForgotPasswordLink_1 = require("../../../utils/createForgotPasswordLink");
@@ -58,7 +58,7 @@ describe('forgot password', () => __awaiter(this, void 0, void 0, function* () {
                 forgotPasswordChange: [
                     {
                         path: 'newPassword',
-                        message: common_1.passwordTooShort,
+                        message: dist_1.passwordTooShort,
                     },
                 ],
             },

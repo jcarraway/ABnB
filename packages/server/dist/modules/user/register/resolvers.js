@@ -8,7 +8,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const common_1 = require("@abb/common");
+const dist_1 = require("../../../../../common/dist");
 const errorMessages_1 = require("./errorMessages");
 const formatYupError_1 = require("../../../utils/formatYupError");
 const User_1 = require("../../../entity/User");
@@ -18,7 +18,7 @@ exports.resolvers = {
     Mutation: {
         register: (_, args, { redis, url }) => __awaiter(this, void 0, void 0, function* () {
             try {
-                yield common_1.userValidationSchema.validate(args, { abortEarly: false });
+                yield dist_1.userValidationSchema.validate(args, { abortEarly: false });
             }
             catch (err) {
                 return formatYupError_1.formatYupError(err);
@@ -42,7 +42,7 @@ exports.resolvers = {
             });
             yield user.save();
             if (process.env.NODE_ENV !== 'test') {
-                yield sendEmail_1.sendEmail(email, yield createConfirmEmailLink_1.createConfirmEmailLink(url, user.id, redis));
+                yield sendEmail_1.sendEmail(email, yield createConfirmEmailLink_1.createConfirmEmailLink(url, user.id, redis), 'Confirm email');
             }
             return null;
         }),

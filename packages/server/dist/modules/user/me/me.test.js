@@ -41,7 +41,7 @@ describe('me', () => __awaiter(this, void 0, void 0, function* () {
         expect(response.data).toEqual({
             me: {
                 id: userId,
-                email: email,
+                email,
             },
         });
     }));

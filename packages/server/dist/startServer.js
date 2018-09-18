@@ -70,7 +70,8 @@ exports.startServer = () => __awaiter(this, void 0, void 0, function* () {
         yield createTestConn_1.createTestConn(true);
     }
     else {
-        yield createTypeormConn_1.createTypeormConn();
+        const conn = yield createTypeormConn_1.createTypeormConn();
+        yield conn.runMigrations();
     }
     const port = process.env.PORT || 4000;
     const app = yield server.start({

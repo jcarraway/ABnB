@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const faker = require("faker");
-const common_1 = require("@abb/common");
+const dist_1 = require("../../../../../common/dist");
 const errorMessages_1 = require("./errorMessages");
 const createTestConn_1 = require("../../../testUtils/createTestConn");
 const testClient_1 = require("../../../utils/testClient");
@@ -47,11 +47,11 @@ describe('Register user', () => __awaiter(this, void 0, void 0, function* () {
             register: [
                 {
                     path: 'email',
-                    message: common_1.emailTooShort,
+                    message: dist_1.emailTooShort,
                 },
                 {
                     path: 'email',
-                    message: common_1.invalidEmail,
+                    message: dist_1.invalidEmail,
                 },
             ],
         });
@@ -62,7 +62,7 @@ describe('Register user', () => __awaiter(this, void 0, void 0, function* () {
             register: [
                 {
                     path: 'password',
-                    message: common_1.passwordTooShort,
+                    message: dist_1.passwordTooShort,
                 },
             ],
         });
@@ -73,15 +73,15 @@ describe('Register user', () => __awaiter(this, void 0, void 0, function* () {
             register: [
                 {
                     path: 'email',
-                    message: common_1.emailTooShort,
+                    message: dist_1.emailTooShort,
                 },
                 {
                     path: 'email',
-                    message: common_1.invalidEmail,
+                    message: dist_1.invalidEmail,
                 },
                 {
                     path: 'password',
-                    message: common_1.passwordTooShort,
+                    message: dist_1.passwordTooShort,
                 },
             ],
         });

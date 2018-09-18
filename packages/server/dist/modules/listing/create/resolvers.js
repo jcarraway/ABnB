@@ -8,13 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = require("typeorm");
-const User_1 = require("../entity/User");
-const Listing_1 = require("../entity/Listing");
-exports.createTypeormConn = () => __awaiter(this, void 0, void 0, function* () {
-    const connectionOptions = yield typeorm_1.getConnectionOptions(process.env.NODE_ENV);
-    return process.env.NODE_ENV === 'production'
-        ? typeorm_1.createConnection(Object.assign({}, connectionOptions, { url: process.env.DATABASE_URL, entities: [User_1.User, Listing_1.Listing], name: 'default' }))
-        : typeorm_1.createConnection(Object.assign({}, connectionOptions, { name: 'default' }));
-});
-//# sourceMappingURL=createTypeormConn.js.map
+const Listing_1 = require("../../../entity/Listing");
+const isAuthenticated_1 = require("../../../middleware/isAuthenticated");
+exports.resolvers = {
+    Mutation: {
+        createListing: (_, { input }, { session }) => __awaiter(this, void 0, void 0, function* () {
+            isAuthenticated_1.isAuthenticated(session);
+            yield Listing_1.Listing.create(Object.assign({}, input, { pictureUrl: '', userId: session.userId })).save();
+            return true;
+        }),
+    },
+};
+//# sourceMappingURL=resolvers.js.map

@@ -8,27 +8,41 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const SparkPost = require("sparkpost");
-const client = new SparkPost(process.env.SPARKPOST_API_KEY);
-exports.sendEmail = (recipient, url) => __awaiter(this, void 0, void 0, function* () {
-    const response = yield client.transmissions.send({
-        options: {
-            sandbox: true,
-        },
-        content: {
-            from: 'testing@sparkpostbox.com',
-            subject: 'Confirm Email',
+const nodemailer = require("nodemailer");
+exports.sendEmail = (recipient, url, linkText) => __awaiter(this, void 0, void 0, function* () {
+    nodemailer.createTestAccount((err, account) => {
+        if (err) {
+            console.log(err);
+        }
+        const transporter = nodemailer.createTransport({
+            host: account.smtp.host,
+            port: account.smtp.port,
+            auth: {
+                user: account.user,
+                pass: account.pass,
+            },
+        });
+        const message = {
+            from: 'Sender Name <sender@example.com>',
+            to: `Recipient <${recipient}>`,
+            subject: 'Nodemailer is unicode friendly ✔',
+            text: 'Hello to myself!',
             html: `
-        <html>
-          <body>
-            <p>Testing SparkPost - the world\'s most awesomest email service!</p>
-            <a href=${url}>Confirm Email</a>
-          </body>
-        </html>
-      `,
-        },
-        recipients: [{ address: recipient }],
+          <html>
+            <body>
+              <p>Testing Nodemailer - the world\'s most awesomest email service!</p>
+              <a href=${url}>${linkText}</a>
+            </body>
+          </html>
+        `,
+        };
+        transporter.sendMail(message, (err1, info) => {
+            if (err1) {
+                console.log('Error occurred. ' + err1.message);
+            }
+            console.log('Message sent: %s', info.messageId);
+            console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+        });
     });
-    console.log('send email response: ', response);
 });
 //# sourceMappingURL=sendEmail.js.map

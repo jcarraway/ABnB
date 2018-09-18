@@ -23,33 +23,37 @@ exports.resolvers = {
         login: (_, { email, password }, { session, redis, req }) => __awaiter(this, void 0, void 0, function* () {
             const user = yield User_1.User.findOne({ where: { email } });
             if (!user) {
-                return errorResponse;
+                return { errors: errorResponse };
             }
             if (!user.confirmed) {
-                return [
-                    {
-                        path: 'email',
-                        message: errorMessages_1.confirmEmailError,
-                    },
-                ];
+                return {
+                    errors: [
+                        {
+                            path: 'email',
+                            message: errorMessages_1.confirmEmailError,
+                        },
+                    ],
+                };
             }
             if (user.accountLocked) {
-                return [
-                    {
-                        path: 'email',
-                        message: errorMessages_1.accountLockedError,
-                    },
-                ];
+                return {
+                    errors: [
+                        {
+                            path: 'email',
+                            message: errorMessages_1.accountLockedError,
+                        },
+                    ],
+                };
             }
             const valid = yield bcrypt.compare(password, user.password);
             if (!valid) {
-                return errorResponse;
+                return { errors: errorResponse };
             }
             session.userId = user.id;
             if (req.sessionID) {
                 yield redis.lpush(`${constants_1.userSessionIdPrefix}${user.id}`, req.sessionID);
             }
-            return null;
+            return { sessionId: req.sessionID };
         }),
     },
 };

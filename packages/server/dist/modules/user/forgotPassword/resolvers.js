@@ -8,18 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const yup = require("yup");
 const bcrypt = require("bcryptjs");
-const common_1 = require("@abb/common");
-const forgotPasswordLockAccount_1 = require("../../../utils/forgotPasswordLockAccount");
+const dist_1 = require("../../../../../common/dist");
 const createForgotPasswordLink_1 = require("../../../utils/createForgotPasswordLink");
 const User_1 = require("../../../entity/User");
 const errorMessages_1 = require("./errorMessages");
 const constants_1 = require("../../../constants");
 const formatYupError_1 = require("../../../utils/formatYupError");
-const schema = yup.object().shape({
-    newPassword: common_1.passwordValidation,
-});
+const sendEmail_1 = require("../../../utils/sendEmail");
 exports.resolvers = {
     Mutation: {
         sendForgotPasswordEmail: (_, { email }, { redis }) => __awaiter(this, void 0, void 0, function* () {
@@ -29,16 +25,11 @@ exports.resolvers = {
                 },
             });
             if (!user) {
-                return [
-                    {
-                        path: 'email',
-                        message: errorMessages_1.userNotFoundError,
-                    },
-                ];
+                return { ok: true };
             }
             const userId = user.id;
-            yield forgotPasswordLockAccount_1.forgotPasswordLockAccount(userId, redis);
-            yield createForgotPasswordLink_1.createForgotPasswordLink('', userId, redis);
+            const url = yield createForgotPasswordLink_1.createForgotPasswordLink(process.env.FRONTEND_HOST, userId, redis);
+            yield sendEmail_1.sendEmail(email, url, 'Reset password');
             return true;
         }),
         forgotPasswordChange: (_, { newPassword, key }, { redis }) => __awaiter(this, void 0, void 0, function* () {
@@ -47,13 +38,13 @@ exports.resolvers = {
             if (!userId) {
                 return [
                     {
-                        path: 'key',
+                        path: 'newPassword',
                         message: errorMessages_1.expiredKeyError,
                     },
                 ];
             }
             try {
-                yield schema.validate({ newPassword }, { abortEarly: false });
+                yield dist_1.changePasswordSchema.validate({ newPassword }, { abortEarly: false });
             }
             catch (err) {
                 return formatYupError_1.formatYupError(err);
