@@ -1,0 +1,2 @@
+// to create migrations
+npx ts-node ./node_modules/.bin/typeorm migration:generate -n ListingUserRelationship -c development
