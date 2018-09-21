@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "..",
+    "paths": {
+      "@abb/*": ["./*/src"]
+    },
     "outDir": "build/dist",
     "module": "esnext",
     "target": "es5",
@@ -17,7 +20,7 @@
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true
-  },
+},
   "exclude": [
     "node_modules",
     "build",

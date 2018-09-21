@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": "..",
+    "paths": {
+      "@abb/*": ["./*/src"]
+    },
     "target": "es6",
     "module": "commonjs",
     "lib": ["es6", "es2017", "dom", "esnext.asynciterable"],
