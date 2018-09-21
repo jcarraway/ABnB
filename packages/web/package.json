@@ -5,7 +5,7 @@
   "dependencies": {
     "@abb/common": "1.0.0",
     "@abb/controllers": "1.0.0",
-    "antd": "^3.6.4",
+    "antd": "3.6.2",
     "apollo-cache-inmemory": "^1.2.5",
     "apollo-client": "^2.3.5",
     "apollo-link-http": "^1.5.4",
