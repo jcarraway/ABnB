@@ -9,10 +9,18 @@ export class LoginConnector extends React.PureComponent<
   RouteComponentProps<{}>
 > {
   onFinish = () => {
-    this.props.history.push('/');
+    const {
+      history,
+      location: { state },
+    } = this.props;
+    if (state && state.next) {
+      return history.push(state.next);
+    }
+    history.push('/');
   };
 
   render() {
+    console.log(this.props.location.state);
     return (
       <LoginController>
         {({ submit }) => <LoginView onFinish={this.onFinish} submit={submit} />}
