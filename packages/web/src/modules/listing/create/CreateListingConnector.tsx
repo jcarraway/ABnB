@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Form as AntForm, Button } from 'antd';
 import { Form, Formik, FormikActions } from 'formik';
 import { RouteComponentProps } from 'react-router-dom';
-import { withCreateListing, CreateListingProps } from '@abb/controllers';
+import { withCreateListing, WithCreateListingProps } from '@abb/controllers';
 
 import { Page1 } from './view/Page1';
 import { Page2 } from './view/Page2';
@@ -29,7 +29,7 @@ interface State {
 // tslint:disable-next-line:jsx-key
 const pages = [<Page1 />, <Page2 />, <Page3 />];
 class C extends React.PureComponent<
-  RouteComponentProps<{}> & CreateListingProps,
+  RouteComponentProps<{}> & WithCreateListingProps,
   State
 > {
   state = {

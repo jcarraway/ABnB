@@ -1,3 +1,4 @@
+// @ts-ignore
 import * as React from 'react';
 import gql from 'graphql-tag';
 import { graphql } from 'react-apollo';
@@ -32,9 +33,9 @@ export const createListingMutation = gql`
       }
     )
   }
-` as any & React.AbstractView;
+`;
 
-export interface CreateListingProps {
+export interface WithCreateListingProps {
   createListing: (variables: CreateListingMutationVariables) => void;
 }
 
@@ -42,7 +43,7 @@ export const withCreateListing = graphql<
   any,
   CreateListingMutation,
   CreateListingMutationVariables,
-  CreateListingProps
+  WithCreateListingProps
 >(createListingMutation, {
   props: ({ mutate }) => ({
     createListing: async variables => {
