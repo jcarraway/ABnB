@@ -27,7 +27,11 @@ export const SelectField: React.SFC<
   const errorMsg = touched[field.name] && errors[field.name];
 
   const handleChange = (newValue: any) => {
+    console.log('new value:', newValue);
+    console.log('field name:', field.name);
+    console.log('field value:', field.value);
     setFieldValue(field.name, newValue);
+    field.value = newValue;
   };
 
   if (props.mode === 'tags') {

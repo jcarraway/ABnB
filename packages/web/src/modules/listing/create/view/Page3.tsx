@@ -31,8 +31,12 @@ export const Page3 = () => (
       placeholder="Amenities"
       mode="tags"
     >
-      <Option key="one" value="one">One</Option>
-      <Option key="two" value="two">Two</Option>
+      <Option key="one" value="one">
+        One
+      </Option>
+      <Option key="two" value="two">
+        Two
+      </Option>
     </Field>
   </React.Fragment>
 );
