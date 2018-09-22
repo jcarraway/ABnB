@@ -4,24 +4,24 @@ import { Form, Select } from 'antd';
 
 const FormItem = Form.Item;
 
-const Option = Select.Option;
+// const Option = Select.Option;
 
 // const children: any[] = [];
 
-export const TagField: React.SFC<
+export const SelectField: React.SFC<
   FieldProps<any> & {
+    input: any;
     prefix: React.ReactNode;
     label?: string;
-    input?: any;
     mode?: any;
     children: any[];
   }
 > = ({
   input,
-  children,
-  field: { onChange, onBlur: _, ...field }, // { name, value, onChange, onBlur }
+  field: { onChange, onBlur: __, ...field }, // { name, value, onChange, onBlur }
   form: { touched, errors, setFieldValue }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   label,
+  children,
   ...props
 }) => {
   const errorMsg = touched[field.name] && errors[field.name];
@@ -31,14 +31,16 @@ export const TagField: React.SFC<
   };
 
   if (props.mode === 'tags') {
-    input.value = [];
+    field.value = [];
   }
 
-  for (let i = 10; i < 36; i++) {
-    children.push(
-      <Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>
-    );
-  }
+  // const children: any[] = [];
+
+  // for (let i = 10; i < 36; i++) {
+  //   children.push(
+  //     <Option key={i.toString(36) + i}>{i.toString(36) + i}</Option>
+  //   );
+  // }
 
   return (
     <FormItem
@@ -48,8 +50,10 @@ export const TagField: React.SFC<
     >
       <Select
         {...field}
+        // {...input}
         {...props}
-        mode="tags"
+        // mode="tags"
+        // tslint:disable-next-line:jsx-no-lambda
         // onChange={(newValue: any) => setFieldValue(field.name, newValue)}
         onChange={handleChange}
       >

@@ -1,8 +1,11 @@
 import * as React from 'react';
 import { Field } from 'formik';
+import { Select } from 'antd';
 
 import { InputField } from '../../../../modules/shared/InputField';
-import { TagField } from '../../../shared/TagField';
+import { SelectField } from '../../../shared/SelectField';
+
+const Option = Select.Option;
 
 export const Page3 = () => (
   <React.Fragment>
@@ -22,6 +25,14 @@ export const Page3 = () => (
       placeholder="Longitude"
     />
 
-    <Field name="amenities" component={TagField} placeholder="Amenities" />
+    <Field
+      name="amenities"
+      component={SelectField}
+      placeholder="Amenities"
+      mode="tags"
+    >
+      <Option key="one" value="one">One</Option>
+      <Option key="two" value="two">Two</Option>
+    </Field>
   </React.Fragment>
 );
