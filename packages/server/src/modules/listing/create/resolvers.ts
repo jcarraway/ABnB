@@ -7,7 +7,7 @@ import { isAuthenticated } from '../../../middleware/isAuthenticated';
 
 const storeUpload = async ({ stream }: any): Promise<any> => {
   const id = shortid.generate();
-  const path = `$images/${id}`;
+  const path = `images/${id}`;
 
   return new Promise((resolve, reject) =>
     stream

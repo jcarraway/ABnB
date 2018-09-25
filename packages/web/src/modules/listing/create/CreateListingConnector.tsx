@@ -3,6 +3,7 @@ import { Form as AntForm, Button } from 'antd';
 import { Form, Formik, FormikActions } from 'formik';
 import { RouteComponentProps } from 'react-router-dom';
 import { withCreateListing, WithCreateListingProps } from '@abb/controllers';
+import { FileWithPreview } from 'react-dropzone';
 
 import { Page1 } from './view/Page1';
 import { Page2 } from './view/Page2';
@@ -11,6 +12,7 @@ import { Page3 } from './view/Page3';
 const FormItem = AntForm.Item;
 
 interface FormValues {
+  picture: FileWithPreview | null;
   name: string;
   category: string;
   description: string;
@@ -52,6 +54,7 @@ class C extends React.PureComponent<
     return (
       <Formik<{}, FormValues>
         initialValues={{
+          picture: null,
           name: '',
           category: '',
           description: '',
@@ -64,37 +67,39 @@ class C extends React.PureComponent<
         }}
         onSubmit={this.submit}
       >
-        {({ isSubmitting }) => (
-          <Form style={{ display: 'flex' }}>
-            <div style={{ width: 400, margin: 'auto' }}>
-              {pages[this.state.page]}
-              <FormItem>
-                <div
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'flex-end',
-                  }}
-                >
-                  {this.state.page === pages.length - 1 ? (
-                    <div>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        disabled={isSubmitting}
-                      >
-                        Create Listing
+        {({ isSubmitting, values }) =>
+          console.log(values) || (
+            <Form style={{ display: 'flex' }}>
+              <div style={{ width: 400, margin: 'auto' }}>
+                {pages[this.state.page]}
+                <FormItem>
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'flex-end',
+                    }}
+                  >
+                    {this.state.page === pages.length - 1 ? (
+                      <div>
+                        <Button
+                          type="primary"
+                          htmlType="submit"
+                          disabled={isSubmitting}
+                        >
+                          Create Listing
+                        </Button>
+                      </div>
+                    ) : (
+                      <Button type="primary" onClick={this.nextPage}>
+                        Next Page
                       </Button>
-                    </div>
-                  ) : (
-                    <Button type="primary" onClick={this.nextPage}>
-                      Next Page
-                    </Button>
-                  )}
-                </div>
-              </FormItem>
-            </div>
-          </Form>
-        )}
+                    )}
+                  </div>
+                </FormItem>
+              </div>
+            </Form>
+          )
+        }
       </Formik>
     );
   }
