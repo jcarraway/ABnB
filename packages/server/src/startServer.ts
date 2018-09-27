@@ -6,6 +6,7 @@ import * as session from 'express-session';
 import * as connectRedis from 'connect-redis';
 import * as RateLimit from 'express-rate-limit';
 import * as RateLimitRedisStore from 'rate-limit-redis';
+import * as express from 'express';
 
 import { redis } from './redis';
 import { redisSessionPrefix } from './constants';
@@ -13,6 +14,7 @@ import { genSchema } from './utils/generateSchema';
 import { confirmEmail } from './routes/confirmEmail';
 import { createTypeormConn } from './utils/createTypeormConn';
 import { createTestConn } from './testUtils/createTestConn';
+import { userLoader } from './loaders/UserLoader';
 
 const SESSION_SECRET = 'alkdjfalkdjaflkdjag';
 
@@ -30,6 +32,7 @@ export const startServer = async () => {
       url: request.protocol + '://' + request.get('host'),
       session: request.session,
       req: request,
+      userLoader: userLoader()
     }),
   });
 
@@ -61,6 +64,8 @@ export const startServer = async () => {
       },
     })
   );
+
+  server.express.use('/images', express.static('images'));
 
   const cors = {
     credentials: true,
