@@ -48,7 +48,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 import * as React from 'react';
-import { graphql } from 'react-apollo';
+import { graphql, withApollo, } from 'react-apollo';
 import gql from 'graphql-tag';
 import { normalizeErrors } from '../../utils/normalizeErrors';
 var C = /** @class */ (function (_super) {
@@ -74,6 +74,9 @@ var C = /** @class */ (function (_super) {
                         if (sessionId && this.props.onSessionId) {
                             this.props.onSessionId(sessionId);
                         }
+                        return [4 /*yield*/, this.props.client.resetStore()];
+                    case 2:
+                        _b.sent();
                         return [2 /*return*/, null];
                 }
             });
@@ -86,6 +89,6 @@ var C = /** @class */ (function (_super) {
     return C;
 }(React.PureComponent));
 var loginMutation = gql(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  mutation LoginMutation($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      errors {\n        path\n        message\n      }\n      sessionId\n    }\n  }\n"], ["\n  mutation LoginMutation($email: String!, $password: String!) {\n    login(email: $email, password: $password) {\n      errors {\n        path\n        message\n      }\n      sessionId\n    }\n  }\n"])));
-export var LoginController = graphql(loginMutation)(C);
+export var LoginController = graphql(loginMutation)(withApollo(C));
 var templateObject_1;
 //# sourceMappingURL=index.js.map
