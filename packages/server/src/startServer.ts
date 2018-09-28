@@ -27,12 +27,13 @@ export const startServer = async () => {
 
   const server = new GraphQLServer({
     schema: genSchema() as any,
-    context: ({ request }) => ({
+    context: ({ request, response }) => ({
       redis,
       url: request.protocol + '://' + request.get('host'),
       session: request.session,
       req: request,
-      userLoader: userLoader()
+      res: response,
+      userLoader: userLoader(),
     }),
   });
 
