@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { withFormik, FormikErrors, FormikProps, Field } from 'formik';
 import { View, Text } from 'react-native';
-import { Button, Card } from 'react-native-elements';
 import { loginSchema } from '@abb/common';
+import { Button, Card } from 'react-native-elements';
 
 import { InputField } from '../../shared/InputField';
 
@@ -67,4 +67,4 @@ export const LoginView = withFormik<Props, FormValues>({
     }
     props.onFinish();
   },
-})(C);
+})(C as any);
