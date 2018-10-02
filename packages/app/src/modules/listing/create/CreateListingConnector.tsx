@@ -1,15 +1,17 @@
 import * as React from 'react';
 import { View, Text } from 'react-native';
-import { Formik, Field } from 'formik';
+import { Formik, Field, FormikActions } from 'formik';
 import { Button, Card } from 'react-native-elements';
+import { RouteComponentProps } from 'react-router-native';
+import { withCreateListing, WithCreateListingProps } from '@abb/controllers';
 
 import { InputField } from '../../shared/InputField';
-import { withCreateListing, WithCreateListingProps } from '@abb/controllers';
-import { RouteComponentProps } from 'react-router-native';
 import { CheckboxGroup } from '../../shared/CheckboxGroup';
+import { ImageField } from '../../shared/ImageField';
+import { ReactNativeFile } from 'apollo-upload-client';
 
 interface FormValues {
-  picture: null;
+  picture: ReactNativeFile | null;
   name: string;
   category: string;
   description: string;
@@ -26,12 +28,19 @@ class C extends React.PureComponent<
   RouteComponentProps<{}> & WithCreateListingProps
 > {
   submit = async (
-    values: FormValues
-    // { setSubmitting }: FormikActions<FormValues>
+    { price, beds, guests, latitude, longitude, ...values }: FormValues,
+    { setSubmitting }: FormikActions<FormValues>
   ) => {
     console.log('Values:', values);
-    // await this.props.createListing(values);
-    // setSubmitting(false);
+    await this.props.createListing({
+      ...values,
+      price: parseInt(price, 10),
+      beds: parseInt(beds, 10),
+      guests: parseInt(guests, 10),
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+    });
+    setSubmitting(false);
   };
 
   render() {
@@ -70,6 +79,11 @@ class C extends React.PureComponent<
                   placeholder="Name"
                   containerStyle={{ width: '100%' }}
                   autoCapitalize="none"
+                />
+                <Field
+                  name="picture"
+                  title="Pick a picture"
+                  component={ImageField}
                 />
                 <Field
                   name="category"
