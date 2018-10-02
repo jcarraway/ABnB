@@ -6,6 +6,7 @@ import { Button, Card } from 'react-native-elements';
 import { InputField } from '../../shared/InputField';
 import { withCreateListing, WithCreateListingProps } from '@abb/controllers';
 import { RouteComponentProps } from 'react-router-native';
+import { CheckboxGroup } from '../../shared/CheckboxGroup';
 
 interface FormValues {
   picture: null;
@@ -46,79 +47,90 @@ class C extends React.PureComponent<
           guests: '0',
           latitude: '0',
           longitude: '0',
-          amenities: [''],
+          amenities: [],
         }}
         onSubmit={this.submit}
       >
-        {({ handleSubmit }) => (
-          <View
-            style={{
-              flex: 1,
-              display: 'flex',
-              justifyContent: 'center',
-            }}
-          >
-            <Card>
-              <Text style={{ fontSize: 30, marginBottom: 10 }}>
-                Create Listing
-              </Text>
-              <Field
-                name="name"
-                component={InputField}
-                placeholder="Name"
-                containerStyle={{ width: '100%' }}
-                autoCapitalize="none"
-              />
-              <Field
-                name="category"
-                component={InputField}
-                placeholder="Category"
-                containerStyle={{ width: '100%' }}
-                autoCapitalize="none"
-              />
-              <Field
-                name="description"
-                component={InputField}
-                placeholder="Description"
-                containerStyle={{ width: '100%' }}
-                autoCapitalize="none"
-              />
-              <Field
-                name="price"
-                label="Price"
-                component={InputField}
-                containerStyle={{ width: '100%' }}
-                autoCapitalize="none"
-              />
-              <Field
-                name="beds"
-                label="Beds"
-                component={InputField}
-                containerStyle={{ width: '100%' }}
-                autoCapitalize="none"
-              />
-              <Field
-                name="latitude"
-                label="Latitude"
-                component={InputField}
-                containerStyle={{ width: '100%' }}
-                autoCapitalize="none"
-              />
-              <Field
-                name="longitude"
-                label="Longitude"
-                component={InputField}
-                containerStyle={{ width: '100%' }}
-                autoCapitalize="none"
-              />
-              <Button
-                style={{ marginTop: 10 }}
-                title="Save Listing"
-                onPress={handleSubmit as any}
-              />
-            </Card>
-          </View>
-        )}
+        {({ handleSubmit, values }) =>
+          console.log(values) || (
+            <View
+              style={{
+                flex: 1,
+                display: 'flex',
+                justifyContent: 'center',
+              }}
+            >
+              <Card>
+                <Text style={{ fontSize: 30, marginBottom: 10 }}>
+                  Create Listing
+                </Text>
+                <Field
+                  name="name"
+                  component={InputField}
+                  placeholder="Name"
+                  containerStyle={{ width: '100%' }}
+                  autoCapitalize="none"
+                />
+                <Field
+                  name="category"
+                  component={InputField}
+                  placeholder="Category"
+                  containerStyle={{ width: '100%' }}
+                  autoCapitalize="none"
+                />
+                <Field
+                  name="description"
+                  component={InputField}
+                  placeholder="Description"
+                  containerStyle={{ width: '100%' }}
+                  autoCapitalize="none"
+                />
+                <Field
+                  name="price"
+                  label="Price"
+                  component={InputField}
+                  keyboardType="numeric"
+                  containerStyle={{ width: '100%' }}
+                  autoCapitalize="none"
+                />
+                <Field
+                  name="beds"
+                  label="Beds"
+                  component={InputField}
+                  keyboardType="numeric"
+                  containerStyle={{ width: '100%' }}
+                  autoCapitalize="none"
+                />
+                <Field
+                  name="latitude"
+                  label="Latitude"
+                  component={InputField}
+                  keyboardType="numeric"
+                  containerStyle={{ width: '100%' }}
+                  autoCapitalize="none"
+                />
+                <Field
+                  name="longitude"
+                  label="Longitude"
+                  component={InputField}
+                  keyboardType="numeric"
+                  containerStyle={{ width: '100%' }}
+                  autoCapitalize="none"
+                />
+                <Field
+                  name="amenities"
+                  options={['pool', 'spa', 'ferris wheel']}
+                  component={CheckboxGroup}
+                />
+                <Button
+                  style={{ marginTop: 10 }}
+                  title="Save Listing"
+                  onPress={handleSubmit as any}
+                />
+              </Card>
+            </View>
+          )
+        }
       </Formik>
     );
   }
