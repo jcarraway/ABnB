@@ -1,4 +1,3 @@
-type Subscription { 
-  newMessage: Message!
+type Subscription {
+  newMessage(listingId: String!): Message!
 }
-
