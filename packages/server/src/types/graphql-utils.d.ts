@@ -1,5 +1,6 @@
 import { Redis } from 'ioredis';
 import * as express from 'express';
+import { PubSub } from 'graphql-yoga';
 
 import { userLoader } from '../loaders/UserLoader';
 export interface Session extends Express.Session {
@@ -13,6 +14,7 @@ export interface Context {
   req: Express.Request;
   res: express.Response;
   userLoader: ReturnType<typeof userLoader>;
+  pubsub: PubSub;
 }
 
 export type Resolver = (
@@ -32,6 +34,6 @@ export type GraphQLMiddlewareFunc = (
 
 export interface ResolverMap {
   [key: string]: {
-    [key: string]: Resolver;
+    [key: string]: Resolver | {[key: string]: Resolver};
   };
 }
