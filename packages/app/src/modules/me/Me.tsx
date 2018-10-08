@@ -16,7 +16,9 @@ export class Me extends React.PureComponent {
   render() {
     return (
       <Query query={meQuery}>
-        {({ data }) => <Text>{JSON.stringify(data)}</Text>}
+        {({ data }) => (
+          <Text style={{ paddingTop: 20 }}>{JSON.stringify(data)}</Text>
+        )}
       </Query>
     );
   }

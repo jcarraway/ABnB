@@ -6,6 +6,7 @@ import * as session from 'express-session';
 import * as connectRedis from 'connect-redis';
 import * as RateLimit from 'express-rate-limit';
 import * as RateLimitRedisStore from 'rate-limit-redis';
+import { applyMiddleware } from 'graphql-middleware';
 import * as express from 'express';
 
 import { redis } from './redis';
@@ -15,18 +16,22 @@ import { confirmEmail } from './routes/confirmEmail';
 import { createTypeormConn } from './utils/createTypeormConn';
 import { createTestConn } from './testUtils/createTestConn';
 import { userLoader } from './loaders/UserLoader';
+import { middleware } from './middleware';
 
 const SESSION_SECRET = 'alkdjfalkdjaflkdjag';
 
-const RedisStore = connectRedis(session);
+const RedisStore = connectRedis(session as any);
 
 export const startServer = async () => {
   if (process.env.NODE_ENV === 'test') {
     await redis.flushall();
   }
 
+  const schema = genSchema() as any;
+  applyMiddleware(schema, middleware);
+
   const server = new GraphQLServer({
-    schema: genSchema() as any,
+    schema,
     context: ({ request, response }) => ({
       redis,
       url: request.protocol + '://' + request.get('host'),
@@ -43,18 +48,18 @@ export const startServer = async () => {
         client: redis,
       }),
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 500, // limit each IP to 100 requests per windowMs
+      max: 500, // limit each IP to 500 requests per windowMs
       delayMs: 0, // disable delaying - full speed until the max limit is reached
     })
   );
 
   server.express.use(
     session({
-      name: 'xid',
       store: new RedisStore({
         client: redis as any,
         prefix: redisSessionPrefix,
       }),
+      name: 'xid',
       secret: SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
@@ -81,8 +86,9 @@ export const startServer = async () => {
   if (process.env.NODE_ENV === 'test') {
     await createTestConn(true);
   } else {
-    const conn = await createTypeormConn();
-    await conn.runMigrations();
+    await createTypeormConn();
+    // const conn = await createTypeormConn();
+    // await conn.runMigrations();
   }
 
   const port = process.env.PORT || 4000;

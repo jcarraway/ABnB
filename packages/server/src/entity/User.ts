@@ -6,12 +6,13 @@ import {
   PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany
+  OneToMany,
 } from 'typeorm';
 import * as shortid from 'shortid';
 import * as bcrypt from 'bcryptjs';
 
 import { Listing } from './Listing';
+import { Message } from './Message';
 
 @Entity('users')
 export class User extends BaseEntity {
@@ -41,6 +42,9 @@ export class User extends BaseEntity {
 
   @OneToMany(() => Listing, listing => listing.user)
   listings: Listing[];
+
+  @OneToMany(() => Message, message => message.user)
+  messages: Message[];
 
   @BeforeInsert()
   addShortLink() {

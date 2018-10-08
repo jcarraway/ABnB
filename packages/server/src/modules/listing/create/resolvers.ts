@@ -3,7 +3,7 @@ import { createWriteStream } from 'fs';
 
 import { ResolverMap } from '../../../types/graphql-utils';
 import { Listing } from '../../../entity/Listing';
-import { isAuthenticated } from '../../../middleware/isAuthenticated';
+// import { isAuthenticated } from '../../../middleware/isAuthenticated';
 
 const storeUpload = async (stream: any, mimetype: string): Promise<any> => {
   const extension = mimetype.split('/')[1];
@@ -27,9 +27,9 @@ const processUpload = async (upload: any) => {
 export const resolvers: ResolverMap = {
   Mutation: {
     createListing: async (_, { input: { picture, ...data } }, { session }) => {
-      isAuthenticated(session);
+      // isAuthenticated(session);
 
-      const pictureUrl = await processUpload(picture);
+      const pictureUrl = picture ? await processUpload(picture) : null;
 
       await Listing.create({
         ...data,

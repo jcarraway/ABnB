@@ -7,7 +7,7 @@ export class C extends React.PureComponent<WithFindListings> {
   render() {
     const { listings } = this.props;
     return (
-      <ScrollView style={{ marginTop: 20 }}>
+      <ScrollView style={{ marginVertical: 20 }}>
         {listings.map(l => (
           <Card
             key={`${l.id}-flc`}
