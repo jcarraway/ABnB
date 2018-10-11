@@ -102,3 +102,19 @@ export interface RegisterMutationVariables {
     email: string;
     password: string;
 }
+export interface ViewMessagesQuery_findMessages_user {
+    id: string;
+    email: string;
+}
+export interface ViewMessagesQuery_findMessages {
+    id: string;
+    text: string;
+    user: ViewMessagesQuery_findMessages_user;
+    listingId: string;
+}
+export interface ViewMessagesQuery {
+    findMessages: ViewMessagesQuery_findMessages[];
+}
+export interface ViewMessagesQueryVariables {
+    listingId: string;
+}

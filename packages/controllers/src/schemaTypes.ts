@@ -192,6 +192,33 @@ export interface RegisterMutationVariables {
 /* tslint:disable */
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL query operation: ViewMessagesQuery
+// ====================================================
+
+export interface ViewMessagesQuery_findMessages_user {
+  id: string;
+  email: string;
+}
+
+export interface ViewMessagesQuery_findMessages {
+  id: string;
+  text: string;
+  user: ViewMessagesQuery_findMessages_user;
+  listingId: string;
+}
+
+export interface ViewMessagesQuery {
+  findMessages: ViewMessagesQuery_findMessages[];
+}
+
+export interface ViewMessagesQueryVariables {
+  listingId: string;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

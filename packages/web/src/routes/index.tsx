@@ -11,6 +11,7 @@ import { TextPage } from '../modules/textPage';
 import { FindListingsConnector } from '../modules/listing/find/FindListingsConnector';
 import { Logout } from '../modules/logout';
 import { FindOneListingConnector } from '../modules/listing/detail/FindOneListingConnector';
+import { MessagesConnector } from '../modules/messages/MessagesConnector';
 
 export const Routes = () => (
   <BrowserRouter>
@@ -26,7 +27,16 @@ export const Routes = () => (
       <Route path="/m" component={TextPage} />
       <Route path="/listings" component={FindListingsConnector} />
       <Route path="/logout" component={Logout} />
-      <Route path="/listing/:listingId" component={FindOneListingConnector} />
+      <Route
+        exact={true}
+        path="/listing/:listingId"
+        component={FindOneListingConnector}
+      />
+      <Route
+        exact={true}
+        path="/listing/:listingId/chat"
+        component={MessagesConnector}
+      />
       <AuthRoute path="/create-listing" component={CreateListingConnector} />
     </Switch>
   </BrowserRouter>

@@ -6,6 +6,7 @@ export * from './modules/CreateListingController';
 export * from './modules/FindListingsController';
 export * from './modules/LogoutController';
 export * from './modules/FindOneListingController';
+export * from './modules/ViewMessagesController';
 export * from './modules/auth/AuthRoute';
 export * from './schemaTypes';
 export * from './types/NormalizedErrorMap';
