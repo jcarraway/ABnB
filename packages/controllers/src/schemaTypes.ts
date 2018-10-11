@@ -85,6 +85,41 @@ export interface FindListingsQuery {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: FindOneListingQuery
+// ====================================================
+
+export interface FindOneListingQuery_findOneListing_owner {
+  id: string;
+  email: string;
+}
+
+export interface FindOneListingQuery_findOneListing {
+  id: string;
+  name: string;
+  shortLink: string;
+  latitude: number;
+  longitude: number;
+  description: string;
+  category: string;
+  price: number;
+  beds: number;
+  guests: number;
+  pictureUrl: string;
+  owner: FindOneListingQuery_findOneListing_owner;
+}
+
+export interface FindOneListingQuery {
+  findOneListing: FindOneListingQuery_findOneListing | null;
+}
+
+export interface FindOneListingQueryVariables {
+  id: string;
+}
+
+/* tslint:disable */
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: SendForgotPasswordEmailMutation
 // ====================================================
 

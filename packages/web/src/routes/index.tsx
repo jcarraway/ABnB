@@ -10,7 +10,7 @@ import { CreateListingConnector } from '../modules/listing/create/CreateListingC
 import { TextPage } from '../modules/textPage';
 import { FindListingsConnector } from '../modules/listing/find/FindListingsConnector';
 import { Logout } from '../modules/logout';
-import { TestSub } from '../modules/TestSub';
+import { FindOneListingConnector } from '../modules/listing/detail/FindOneListingConnector';
 
 export const Routes = () => (
   <BrowserRouter>
@@ -26,7 +26,7 @@ export const Routes = () => (
       <Route path="/m" component={TextPage} />
       <Route path="/listings" component={FindListingsConnector} />
       <Route path="/logout" component={Logout} />
-      <Route path="/test-sub" component={TestSub} />
+      <Route path="/listing/:listingId" component={FindOneListingConnector} />
       <AuthRoute path="/create-listing" component={CreateListingConnector} />
     </Switch>
   </BrowserRouter>

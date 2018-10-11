@@ -43,6 +43,30 @@ export interface FindListingsQuery_findListings {
 export interface FindListingsQuery {
     findListings: FindListingsQuery_findListings[];
 }
+export interface FindOneListingQuery_findOneListing_owner {
+    id: string;
+    email: string;
+}
+export interface FindOneListingQuery_findOneListing {
+    id: string;
+    name: string;
+    shortLink: string;
+    latitude: number;
+    longitude: number;
+    description: string;
+    category: string;
+    price: number;
+    beds: number;
+    guests: number;
+    pictureUrl: string;
+    owner: FindOneListingQuery_findOneListing_owner;
+}
+export interface FindOneListingQuery {
+    findOneListing: FindOneListingQuery_findOneListing | null;
+}
+export interface FindOneListingQueryVariables {
+    id: string;
+}
 export interface SendForgotPasswordEmailMutation {
     sendForgotPasswordEmail: boolean | null;
 }
