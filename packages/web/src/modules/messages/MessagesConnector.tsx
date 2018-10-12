@@ -6,6 +6,8 @@ import { ChatInput } from './ChatInput';
 export class MessagesConnector extends React.PureComponent<
   RouteComponentProps<{ listingId: string }>
 > {
+  unsubscribe: () => void;
+
   render() {
     const {
       match: {
@@ -14,10 +16,15 @@ export class MessagesConnector extends React.PureComponent<
     } = this.props;
     return (
       <ViewMessages listingId={listingId}>
-        {({ loading, messages }) => {
+        {({ loading, messages, subscribe }) => {
           if (loading) {
             return <div>...loading</div>;
           }
+
+          if (!this.unsubscribe) {
+            this.unsubscribe = subscribe();
+          }
+
           return (
             <div>
               {messages.map(m => (
