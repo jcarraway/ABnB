@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import { ViewMessages } from '@abb/controllers';
+import { ChatInput } from './ChatInput';
 
 export class MessagesConnector extends React.PureComponent<
   RouteComponentProps<{ listingId: string }>
@@ -24,6 +25,7 @@ export class MessagesConnector extends React.PureComponent<
                   {m.user.email} - {m.text}
                 </div>
               ))}
+              <ChatInput listingId={listingId} />
             </div>
           );
         }}
