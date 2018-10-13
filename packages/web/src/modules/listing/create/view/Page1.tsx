@@ -3,7 +3,6 @@ import { Field } from 'formik';
 
 import { InputField } from '../../../../modules/shared/InputField';
 import { DropzoneField } from '../../../shared/DropzoneField';
-import { LocationField } from '../../../shared/LocationField';
 
 export const Page1 = () => (
   <React.Fragment>
@@ -15,6 +14,5 @@ export const Page1 = () => (
       placeholder="Description"
     />
     <Field name="picture" component={DropzoneField} />
-    <Field name="temporary" component={LocationField} />
   </React.Fragment>
 );

@@ -21,6 +21,7 @@
     "react-dom": "^16.4.1",
     "react-dropzone": "^5.1.0",
     "react-geosuggest": "^2.8.0",
+    "react-google-maps": "^9.4.5",
     "react-router-dom": "^4.3.1",
     "react-scripts-ts": "2.16.0",
     "yup": "^0.25.1"
