@@ -811,6 +811,10 @@
     "@types/glob" "*"
     fast-glob "^2.0.2"
 
+"@types/googlemaps@*":
+  version "3.30.14"
+  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.30.14.tgz#4bfd6dd839f7d68e9589f462c1b4fca495c491c6"
+
 "@types/graphql-deduplicator@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@types/graphql-deduplicator/-/graphql-deduplicator-2.0.0.tgz#9e577b8f3feb3d067b0ca756f4a1fb356d533922"
@@ -902,6 +906,13 @@
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/@types/react-dropzone/-/react-dropzone-4.2.2.tgz#af0a2595169700c8ab1114e9096285499beaff40"
   dependencies:
+    "@types/react" "*"
+
+"@types/react-geosuggest@^2.7.8":
+  version "2.7.8"
+  resolved "https://registry.yarnpkg.com/@types/react-geosuggest/-/react-geosuggest-2.7.8.tgz#f3753cb04194f2124cbbca912619c3e36f8db4db"
+  dependencies:
+    "@types/googlemaps" "*"
     "@types/react" "*"
 
 "@types/react-native@*":
@@ -8110,7 +8121,7 @@ lodash.clonedeep@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
 
-lodash.debounce@^4.0.0, lodash.debounce@^4.0.8:
+lodash.debounce@^4.0.0, lodash.debounce@^4.0.6, lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
 
@@ -10643,6 +10654,13 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-addons-shallow-compare@^15.6.2:
+  version "15.6.2"
+  resolved "https://registry.yarnpkg.com/react-addons-shallow-compare/-/react-addons-shallow-compare-15.6.2.tgz#198a00b91fc37623db64a28fd17b596ba362702f"
+  dependencies:
+    fbjs "^0.8.4"
+    object-assign "^4.1.0"
+
 react-apollo@^2.1.11:
   version "2.1.11"
   resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-2.1.11.tgz#ef4805f07af1d732ec94caebf7ba0728e2d162ca"
@@ -10738,6 +10756,14 @@ react-error-overlay@^4.0.0:
 react-fast-compare@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-1.0.0.tgz#813a039155e49b43ceffe99528fe5e9d97a6c938"
+
+react-geosuggest@^2.8.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/react-geosuggest/-/react-geosuggest-2.8.0.tgz#99a1d3cb1f40b37b542e97ed091958756a0aecd0"
+  dependencies:
+    classnames "^2.2.6"
+    lodash.debounce "^4.0.6"
+    react-addons-shallow-compare "^15.6.2"
 
 react-google-maps@^7.3.0:
   version "7.3.0"
