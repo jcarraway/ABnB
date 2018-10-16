@@ -21,6 +21,7 @@ const typeorm_1 = require("typeorm");
 const shortid = require("shortid");
 const bcrypt = require("bcryptjs");
 const Listing_1 = require("./Listing");
+const Message_1 = require("./Message");
 let User = class User extends typeorm_1.BaseEntity {
     addShortLink() {
         this.shortLink = shortid.generate();
@@ -67,6 +68,10 @@ __decorate([
     typeorm_1.OneToMany(() => Listing_1.Listing, listing => listing.user),
     __metadata("design:type", Array)
 ], User.prototype, "listings", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Message_1.Message, message => message.user),
+    __metadata("design:type", Array)
+], User.prototype, "messages", void 0);
 __decorate([
     typeorm_1.BeforeInsert(),
     __metadata("design:type", Function),

@@ -9,7 +9,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = (resolver, parent, args, context, info) => __awaiter(this, void 0, void 0, function* () {
-    const result = yield resolver(parent, args, context, info);
-    return result;
+    return resolver(parent, args, context, info);
 });
 //# sourceMappingURL=middleware.js.map

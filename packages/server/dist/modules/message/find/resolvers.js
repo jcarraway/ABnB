@@ -8,20 +8,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Listing_1 = require("../../../entity/Listing");
+const Message_1 = require("../../../entity/Message");
+const isAuthenticated_1 = require("../../shared/isAuthenticated");
 exports.resolvers = {
-    Mutation: {
-        deleteListing: (_, { id }, { session }) => __awaiter(this, void 0, void 0, function* () {
-            const listing = yield Listing_1.Listing.findOne({ where: { id } });
-            if (!listing) {
-                throw new Error('listing does not exist');
-            }
-            if (session.userId !== listing.userId) {
-                console.log(`this user ${session.userId} is trying to delete a listing they do not own`);
-                throw new Error('not authorized');
-            }
-            yield Listing_1.Listing.remove(listing);
-            return true;
+    Message: {
+        user: ({ userId }, _, { userLoader }) => userLoader.load(userId),
+    },
+    Query: {
+        findMessages: (_, { listingId }, { session }) => __awaiter(this, void 0, void 0, function* () {
+            console.log('is authenticated', isAuthenticated_1.isAuthenticated(session));
+            return Message_1.Message.find({
+                where: {
+                    listingId,
+                    userId: session.userId,
+                },
+            });
         }),
     },
 };

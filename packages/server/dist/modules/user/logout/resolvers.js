@@ -11,7 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const removeAllUsersSessions_1 = require("../../../utils/removeAllUsersSessions");
 exports.resolvers = {
     Mutation: {
-        logout: (_, __, { session, redis }) => __awaiter(this, void 0, void 0, function* () {
+        logout: (_, __, { session, redis, res }) => __awaiter(this, void 0, void 0, function* () {
             const { userId } = session;
             if (userId) {
                 yield removeAllUsersSessions_1.removeAllUsersSessions(userId, redis);
@@ -20,6 +20,7 @@ exports.resolvers = {
                         console.error(err);
                     }
                 });
+                res.clearCookie('xid');
                 return true;
             }
             return false;

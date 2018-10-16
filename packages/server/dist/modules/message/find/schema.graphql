@@ -1,0 +1,10 @@
+type Message {
+  id: ID!
+  text: String!
+  user: User!
+  listingId: String!
+}
+
+type Query {
+  findMessages(listingId: String!): [Message!]!
+}

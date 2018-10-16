@@ -1,0 +1,3 @@
+type Query {
+  findOneListing(id: String!): Listing
+}

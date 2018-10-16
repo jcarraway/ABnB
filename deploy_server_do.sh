@@ -1,7 +1,7 @@
 #! /bin/bash
 yarn build:server
-heroku container:push web
-heroku container:release web
+heroku container:push --app=fathomless-reaches-76428 web
+heroku container:release --app=fathomless-reaches-76428 web
 
 # docker build -t jcarraway/abb:latest .
 # docker push jcarraway/abb:latest

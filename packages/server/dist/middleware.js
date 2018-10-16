@@ -8,11 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = require("typeorm");
-exports.createTypeormConn = () => __awaiter(this, void 0, void 0, function* () {
-    const connectionOptions = yield typeorm_1.getConnectionOptions(process.env.NODE_ENV);
-    return process.env.NODE_ENV === 'production'
-        ? typeorm_1.createConnection(Object.assign({}, connectionOptions, { url: process.env.DATABASE_URL, entities: [process.env.TYPEORM_ENTITIES], name: 'default' }))
-        : typeorm_1.createConnection(Object.assign({}, connectionOptions, { name: 'default' }));
+const isAuthenticated = (resolve, parent, args, context, info) => __awaiter(this, void 0, void 0, function* () {
+    if (!context.session.userId) {
+        console.log('session from middleware', context.session);
+        throw new Error('not authenticated from graphql middleware');
+    }
+    return resolve(parent, args, context, info);
 });
-//# sourceMappingURL=createTypeormConn.js.map
+exports.middleware = {
+    Mutation: {
+        createListing: isAuthenticated,
+        deleteListing: isAuthenticated,
+    },
+};
+//# sourceMappingURL=middleware.js.map

@@ -10,6 +10,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const Listing_1 = require("../../../entity/Listing");
 exports.resolvers = {
+    Listing: {
+        pictureUrl: (parent, _, { url }) => parent.pictureUrl && `${url}/images/${parent.pictureUrl}`,
+        owner: ({ userId }, _, { userLoader }) => userLoader.load(userId),
+    },
     Query: {
         findListings: () => __awaiter(this, void 0, void 0, function* () {
             return Listing_1.Listing.find();

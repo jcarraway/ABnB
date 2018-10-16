@@ -8,11 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const typeorm_1 = require("typeorm");
-exports.createTypeormConn = () => __awaiter(this, void 0, void 0, function* () {
-    const connectionOptions = yield typeorm_1.getConnectionOptions(process.env.NODE_ENV);
-    return process.env.NODE_ENV === 'production'
-        ? typeorm_1.createConnection(Object.assign({}, connectionOptions, { url: process.env.DATABASE_URL, entities: [process.env.TYPEORM_ENTITIES], name: 'default' }))
-        : typeorm_1.createConnection(Object.assign({}, connectionOptions, { name: 'default' }));
+const DataLoader = require("dataloader");
+const User_1 = require("../entity/User");
+const batchUsers = (ids) => __awaiter(this, void 0, void 0, function* () {
+    const users = yield User_1.User.findByIds(ids);
+    const userMap = {};
+    users.forEach(u => {
+        userMap[u.id] = u;
+    });
+    return ids.map(id => userMap[id]);
 });
-//# sourceMappingURL=createTypeormConn.js.map
+exports.userLoader = () => new DataLoader(batchUsers);
+//# sourceMappingURL=UserLoader.js.map
