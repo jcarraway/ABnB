@@ -10,6 +10,8 @@ export const createTypeormConn = async () => {
         url: process.env.DATABASE_URL as string,
         entities: [process.env.TYPEORM_ENTITIES],
         name: 'default',
-      } as any)
+      } as any).then(connection =>
+        console.log('$$entity metadata$$', connection.entityMetadatas)
+      )
     : createConnection({ ...connectionOptions, name: 'default' });
 };
