@@ -104,7 +104,9 @@ export const startServer = async () => {
 
   const listings = await Listing.find();
   const listingsStrings = listings.map(x => JSON.stringify(x));
-  await redis.lpush(listingCacheKey, ...listingsStrings);
+  if (listingsStrings.length) {
+    await redis.lpush(listingCacheKey, ...listingsStrings);
+  }
   // await console.log(await redis.lrange(listingCacheKey, 0, -1));
 
   // const allowPlayground = process.env.NODE_ENV !== 'production';
