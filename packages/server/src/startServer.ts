@@ -109,10 +109,10 @@ export const startServer = async () => {
   }
   // await console.log(await redis.lrange(listingCacheKey, 0, -1));
 
-  const allowPlayground = process.env.NODE_ENV !== 'production';
+  // const allowPlayground = process.env.NODE_ENV !== 'production';
   const port = process.env.PORT || 4000;
   const app = await server.start({
-    playground: allowPlayground as any,
+    // playground: allowPlayground as any,
     cors,
     port: process.env.NODE_ENV === 'test' ? 0 : port,
   });
