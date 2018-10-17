@@ -11,13 +11,14 @@ import * as express from 'express';
 import { RedisPubSub } from 'graphql-redis-subscriptions';
 
 import { redis } from './redis';
-import { redisSessionPrefix } from './constants';
+import { redisSessionPrefix, listingCacheKey } from './constants';
 import { genSchema } from './utils/generateSchema';
 import { confirmEmail } from './routes/confirmEmail';
 import { createTypeormConn } from './utils/createTypeormConn';
 import { createTestConn } from './testUtils/createTestConn';
 import { userLoader } from './loaders/UserLoader';
 import { middleware } from './middleware';
+import { Listing } from './entity/Listing';
 
 const SESSION_SECRET = 'alkdjfalkdjaflkdjag';
 
@@ -98,6 +99,13 @@ export const startServer = async () => {
     // const conn = await createTypeormConn();
     // await conn.runMigrations();
   }
+
+  await redis.del(listingCacheKey);
+
+  const listings = await Listing.find();
+  const listingsStrings = listings.map(x => JSON.stringify(x));
+  await redis.lpush(listingCacheKey, ...listingsStrings);
+  // await console.log(await redis.lrange(listingCacheKey, 0, -1));
 
   const port = process.env.PORT || 4000;
   const app = await server.start({
