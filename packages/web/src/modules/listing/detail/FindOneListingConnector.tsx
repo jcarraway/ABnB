@@ -22,7 +22,12 @@ export class FindOneListingConnector extends React.PureComponent<
           return (
             <div>
               <div>{data.listing.name}</div>
-              <Link to={`/listing/${listingId}/chat`}>Chat</Link>
+              <div>
+                <Link to={`/listing/${listingId}/chat`}>Chat</Link>
+              </div>
+              <div>
+                <Link to={`/listing/${listingId}/edit`}>Edit</Link>
+              </div>
             </div>
           );
         }}

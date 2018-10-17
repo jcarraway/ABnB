@@ -8,6 +8,7 @@ export * from './modules/LogoutController';
 export * from './modules/FindOneListingController';
 export * from './modules/ViewMessagesController';
 export * from './modules/CreateMessageController';
+export * from './modules/UpdateListingController';
 export * from './modules/auth/AuthRoute';
 export * from './schemaTypes';
 export * from './types/NormalizedErrorMap';

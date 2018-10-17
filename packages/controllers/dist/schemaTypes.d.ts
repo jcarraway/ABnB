@@ -108,9 +108,16 @@ export interface RegisterMutationVariables {
     email: string;
     password: string;
 }
+export interface UpdateListingMutation {
+    updateListing: boolean;
+}
+export interface UpdateListingMutationVariables {
+    listingId: string;
+    input: UpdateListingInput;
+}
 export interface ViewMessagesQuery_findMessages_user {
-    id: string;
     email: string;
+    id: string;
 }
 export interface ViewMessagesQuery_findMessages {
     id: string;
@@ -124,7 +131,36 @@ export interface ViewMessagesQuery {
 export interface ViewMessagesQueryVariables {
     listingId: string;
 }
+export interface NewMessageSubscription_newMessage_user {
+    email: string;
+    id: string;
+}
+export interface NewMessageSubscription_newMessage {
+    id: string;
+    text: string;
+    user: NewMessageSubscription_newMessage_user;
+    listingId: string;
+}
+export interface NewMessageSubscription {
+    newMessage: NewMessageSubscription_newMessage;
+}
+export interface NewMessageSubscriptionVariables {
+    listingId: string;
+}
 export interface MessageInput {
     text: string;
     listingId: string;
+}
+export interface UpdateListingInput {
+    name?: string | null;
+    picture?: any | null;
+    pictureUrl?: string | null;
+    category?: string | null;
+    description?: string | null;
+    price?: number | null;
+    beds?: number | null;
+    guests?: number | null;
+    latitude?: number | null;
+    longitude?: number | null;
+    amenities?: string[] | null;
 }

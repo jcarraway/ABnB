@@ -5,16 +5,21 @@ import { processUpload } from '../shared/processUpload';
 
 export const resolvers: ResolverMap = {
   Mutation: {
-    createListing: async (_, { input: { picture, ...data } }, { session }) => {
+    updateListing: async (_, { listingId, input: { picture, ...data } }) => {
       // isAuthenticated(session);
 
-      const pictureUrl = picture ? await processUpload(picture) : null;
+      // const pictureUrl = picture ? await processUpload(picture) : null;
 
-      await Listing.create({
-        ...data,
-        pictureUrl,
-        userId: session.userId,
-      }).save();
+      if (picture) {
+        data.pictureUrl = await processUpload(picture);
+      }
+
+      await Listing.update(
+        { id: listingId },
+        {
+          ...data,
+        }
+      );
 
       return true;
     },

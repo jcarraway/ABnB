@@ -10,8 +10,6 @@ export const createTypeormConn = async () => {
         url: process.env.DATABASE_URL as string,
         entities: [process.env.TYPEORM_ENTITIES],
         name: 'default',
-      } as any).then(connection => console.log('connected', connection))
-    : createConnection({ ...connectionOptions, name: 'default' }).then(
-        connection => console.log('connected', connection)
-      );
+      } as any)
+    : createConnection({ ...connectionOptions, name: 'default' });
 };
