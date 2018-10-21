@@ -19,7 +19,7 @@ interface State {
 export class FindListingsConnector extends React.PureComponent<{}, State> {
   state = {
     name: '',
-    guests: 1,
+    guests: 0,
     beds: 1,
   };
 
@@ -75,7 +75,6 @@ export class FindListingsConnector extends React.PureComponent<{}, State> {
                 loadMore();
                 console.log('loading more data');
               }}
-              style={{ marginBottom: 20 }}
               data={listings}
               keyExtractor={({ id }) => `${id}-flc`}
               renderItem={({ item: l }) => (
