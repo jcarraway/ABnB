@@ -1,5 +1,12 @@
 import * as React from 'react';
-import { Text, TextInput, SafeAreaView, View, FlatList } from 'react-native';
+import {
+  Text,
+  TextInput,
+  SafeAreaView,
+  View,
+  FlatList,
+  ActivityIndicator,
+} from 'react-native';
 import { Card, Button, Slider } from 'react-native-elements';
 import { SearchListings } from '@abb/controllers';
 
@@ -51,15 +58,24 @@ export class FindListingsConnector extends React.PureComponent<{}, State> {
         </View>
 
         <SearchListings
-          variables={{ input: { name, guests, beds }, offset: 0, limit: 10 }}
+          variables={{ input: { name, guests, beds }, offset: 0, limit: 5 }}
         >
-          {({ listings }) => (
+          {({ listings, hasMoreListings, loadMore }) => (
             <FlatList
-              ListFooterComponent={() => (
-                <View>
-                  <Text>Footer</Text>
-                </View>
-              )}
+              ListFooterComponent={() =>
+                hasMoreListings ? (
+                  <ActivityIndicator style={{ marginTop: 20 }} />
+                ) : (
+                  <View />
+                )
+              }
+              onEndReachedThreshold={3}
+              onEndReached={() => {
+                console.log('end reached');
+                loadMore();
+                console.log('loading more data');
+              }}
+              style={{ marginBottom: 20 }}
               data={listings}
               keyExtractor={({ id }) => `${id}-flc`}
               renderItem={({ item: l }) => (

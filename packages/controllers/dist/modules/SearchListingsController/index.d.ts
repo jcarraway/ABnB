@@ -4,6 +4,8 @@ export declare const searchListingsQuery: any;
 export interface WithSearchListings {
     listings: SearchListingsQuery_searchListings[];
     loading: boolean;
+    loadMore: () => void;
+    hasMoreListings: boolean;
 }
 interface Props {
     variables: SearchListingsQueryVariables;
