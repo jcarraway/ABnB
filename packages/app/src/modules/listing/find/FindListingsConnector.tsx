@@ -1,26 +1,82 @@
 import * as React from 'react';
-import { Text, ScrollView } from 'react-native';
-import { withFindListings, WithFindListings } from '@abb/controllers';
-import { Card, Button } from 'react-native-elements';
+import { Text, TextInput, SafeAreaView, View, FlatList } from 'react-native';
+import { Card, Button, Slider } from 'react-native-elements';
+import { SearchListings } from '@abb/controllers';
 
-export class C extends React.PureComponent<WithFindListings> {
+interface State {
+  name: string;
+  guests: number;
+  beds: number;
+}
+
+export class FindListingsConnector extends React.PureComponent<{}, State> {
+  state = {
+    name: '',
+    guests: 1,
+    beds: 1,
+  };
+
   render() {
-    const { listings } = this.props;
+    const { name, guests, beds } = this.state;
     return (
-      <ScrollView style={{ marginVertical: 20 }}>
-        {listings.map(l => (
-          <Card
-            key={`${l.id}-flc`}
-            title={l.name}
-            image={l.pictureUrl ? { uri: l.pictureUrl } : undefined}
-          >
-            <Text>{l.owner.email}</Text>
-            <Button title="See more" />
-          </Card>
-        ))}
-      </ScrollView>
+      <React.Fragment>
+        <SafeAreaView />
+        <TextInput
+          style={{ width: 100, fontSize: 20 }}
+          placeholder="search..."
+          onChangeText={text => this.setState({ name: text })}
+          value={name}
+        />
+
+        <View style={{ alignItems: 'stretch', justifyContent: 'center' }}>
+          <Slider
+            value={guests}
+            onValueChange={value => this.setState({ guests: value })}
+            step={1}
+            // minimumValue={1}
+            maximumValue={10}
+          />
+          <Text>Guests: {guests}</Text>
+        </View>
+
+        <View style={{ alignItems: 'stretch', justifyContent: 'center' }}>
+          <Slider
+            value={beds}
+            onValueChange={value => this.setState({ beds: value })}
+            step={1}
+            minimumValue={1}
+            maximumValue={10}
+          />
+          <Text>Beds: {beds}</Text>
+        </View>
+
+        <SearchListings
+          variables={{ input: { name, guests, beds }, offset: 0, limit: 10 }}
+        >
+          {({ listings }) => (
+            <FlatList
+              ListFooterComponent={() => (
+                <View>
+                  <Text>Footer</Text>
+                </View>
+              )}
+              data={listings}
+              keyExtractor={({ id }) => `${id}-flc`}
+              renderItem={({ item: l }) => (
+                <Card
+                  title={l.name}
+                  image={l.pictureUrl ? { uri: l.pictureUrl } : undefined}
+                >
+                  <Text>{l.owner.email}</Text>
+                  <Text>Beds: {l.beds}</Text>
+                  <Text>Guests: {l.guests}</Text>
+                  <Button title="See more" />
+                </Card>
+              )}
+            />
+          )}
+        </SearchListings>
+      </React.Fragment>
     );
   }
 }
-
-export const FindListingsConnector = withFindListings(C);

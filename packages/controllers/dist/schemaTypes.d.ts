@@ -43,7 +43,7 @@ export interface FindListingsQuery_findListings_owner {
 export interface FindListingsQuery_findListings {
     id: string;
     name: string;
-    pictureUrl: string;
+    pictureUrl: string | null;
     owner: FindListingsQuery_findListings_owner;
 }
 export interface FindListingsQuery {
@@ -64,7 +64,7 @@ export interface FindOneListingQuery_findOneListing {
     price: number;
     beds: number;
     guests: number;
-    pictureUrl: string;
+    pictureUrl: string | null;
     owner: FindOneListingQuery_findOneListing_owner;
 }
 export interface FindOneListingQuery {
@@ -108,6 +108,32 @@ export interface RegisterMutationVariables {
     email: string;
     password: string;
 }
+export interface SearchListingsQuery_searchListings_owner {
+    id: string;
+    email: string;
+}
+export interface SearchListingsQuery_searchListings {
+    id: string;
+    name: string;
+    shortLink: string;
+    latitude: number;
+    longitude: number;
+    description: string;
+    category: string;
+    price: number;
+    beds: number;
+    guests: number;
+    pictureUrl: string | null;
+    owner: SearchListingsQuery_searchListings_owner;
+}
+export interface SearchListingsQuery {
+    searchListings: SearchListingsQuery_searchListings[];
+}
+export interface SearchListingsQueryVariables {
+    input?: SearchListingsInput | null;
+    offset: number;
+    limit: number;
+}
 export interface UpdateListingMutation {
     updateListing: boolean;
 }
@@ -150,6 +176,11 @@ export interface NewMessageSubscriptionVariables {
 export interface MessageInput {
     text: string;
     listingId: string;
+}
+export interface SearchListingsInput {
+    guests?: number | null;
+    beds?: number | null;
+    name?: string | null;
 }
 export interface UpdateListingInput {
     name?: string | null;
