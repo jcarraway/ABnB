@@ -68,40 +68,38 @@ export class ListingForm extends React.PureComponent<Props, State> {
         initialValues={initialValues}
         onSubmit={submit}
       >
-        {({ isSubmitting, values }) =>
-          console.log(values) || (
-            <Form style={{ display: 'flex' }}>
-              <Link to="/logout">Logout</Link>
-              <div style={{ width: 400, margin: 'auto' }}>
-                {pages[this.state.page]}
-                <FormItem>
-                  <div
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                    }}
-                  >
-                    {this.state.page === pages.length - 1 ? (
-                      <div>
-                        <Button
-                          type="primary"
-                          htmlType="submit"
-                          disabled={isSubmitting}
-                        >
-                          Create Listing
-                        </Button>
-                      </div>
-                    ) : (
-                      <Button type="primary" onClick={this.nextPage}>
-                        Next Page
+        {({ isSubmitting, values }) => (
+          <Form style={{ display: 'flex' }}>
+            <Link to="/logout">Logout</Link>
+            <div style={{ width: 400, margin: 'auto' }}>
+              {pages[this.state.page]}
+              <FormItem>
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-end',
+                  }}
+                >
+                  {this.state.page === pages.length - 1 ? (
+                    <div>
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        disabled={isSubmitting}
+                      >
+                        Create Listing
                       </Button>
-                    )}
-                  </div>
-                </FormItem>
-              </div>
-            </Form>
-          )
-        }
+                    </div>
+                  ) : (
+                    <Button type="primary" onClick={this.nextPage}>
+                      Next Page
+                    </Button>
+                  )}
+                </div>
+              </FormItem>
+            </div>
+          </Form>
+        )}
       </Formik>
     );
   }
